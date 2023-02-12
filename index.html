@@ -8,17 +8,14 @@
 </style>
 
 <body>
-  <canvas id="canva" width=window.InnerWidth height=window.InnerHeight></canvas>
+  
+  <canvas id="canva" width="1363" height="240"></canvas>
   
   <script>
     const canvas = document.getElementById("canva");
-    
-    function setup(){
-      canvas.width = window.InnerWidth;
-      canvas.height = window.InnerHeight;
-    }
-    
-    const ctx = canvas.getContext('2d');
+    let ctx = canvas.getContext('2d');
+    ctx.canvas.width = window.innerWidth;
+    ctx.canvas.height = window.innerHeight;
     
     class Root {
       constructor(x,y){
@@ -40,10 +37,9 @@
           ctx.fill();
           ctx.stroke();
         }
-      }
+   		 }
     }
-		
-    window.addEventListener('load', setup);
+    
     window.addEventListener('mousemove', function(e){
       const root = new Root(e.x, e.y);
       root.update();
