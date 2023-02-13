@@ -19,22 +19,65 @@
     
     let drawing = false;
     
+    class Lively{
+      constructor(x,y,size){
+        this.x = x;
+        this.y = y;
+        this.vs = Math.random() * 0.3;
+        this.size = size;
+        this.maxFlowerSize = this.size + Math.random() * 55;
+        this.image = new Image();
+        this.image.src = 'RetroFlowers.jpg';
+        this.frameSize = 690;
+        this.fX = Math.floor(Math.random() * 3);
+        this.fY = Math.floor(Math.random() * 3);
+        
+        if (this.size > 5){
+          this.willFlower = true;
+        }
+        else{
+          this.willFlower = false;
+        }
+      }
+      
+      grow(){
+        if (this.willFlower && (this.size < this.maxFlowerSize)){
+          this.size += this.vs;
+          ctx.drawImage(this.image, this.frameSize * this.fX, this.frameSize * this.fY, this.frameSize, this.frameSize, this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
+        	requestAnimationFrame(this.grow.bind(this));
+        }
+        
+      }
+    }
+    
+    
     class Root {
       constructor(x,y){
         this.x = x
         this.y = y
         this.speedX = Math.random()* 4 - 2;
         this.speedY = Math.random() * 4 - 2;
-        this.maxSize = Math.random() * 10;
-        this.size = Math.random() + 3 ;
-        this.angle = Math.random() * 6;
+        this.maxSize = Math.random() * 8;
+        this.size = Math.random() + 1.5 ;
         this.variedsize = Math.random() * 0.2 + 0.05;
+        this.angleX = Math.random() * 6;
+      	this.varX = Math.random() * 0.6 - 0.3;
+        this.angleY = Math.random() * 6;
+        this.varY = Math.random() * 0.6 - 0.3;
+        this.lightness = 10;
       }
+      
       update(){
-        this.x += this.speedX + Math.sin(this.angle);
-        this.y += this.speedY + Math.sin(this.angle);
+        this.x += this.speedX + Math.sin(this.angleX);
+        this.y += this.speedY + Math.sin(this.angleY);
         this.size += this.variedsize;
-        this.angle += 0.1;
+        this.angleX += this.varX;
+        this.angleY += this.varY;
+        
+        if (this.lightness < 70){
+          this.lightness += 0.25;
+        }
+        
         if (this.size < this.maxSize){
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -42,6 +85,10 @@
           ctx.fill();
           ctx.stroke();
           requestAnimationFrame(this.update.bind(this));
+        }
+        else{
+          const flowers = new Lively(this.x, this.y, this.size);
+        	flowers.grow();
         }
    		 }
     }
