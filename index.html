@@ -1,5 +1,5 @@
 <style>
-  body {
+  body{
     position: absolute;
     background: white;
     width: 100%;
@@ -24,9 +24,9 @@
         this.x = x
         this.y = y
         this.speedX = Math.random()* 4 - 2;
-        this.speedY = Math.random() * 4 -2;
-        this.maxSize = Math.random() * 7 +5;
-        this.size = Math.random() * 1 + 2;
+        this.speedY = Math.random() * 4 - 2;
+        this.maxSize = Math.random() * 10;
+        this.size = Math.random() + 3 ;
         this.angle = Math.random() * 6;
         this.variedsize = Math.random() * 0.2 + 0.05;
       }
@@ -44,6 +44,13 @@
           requestAnimationFrame(this.update.bind(this));
         }
    		 }
+    }
+    
+    function setup(){
+      document.body.style.backgroundImage =
+        "url('https://cdn.shopify.com/s/files/1/1394/8105/files/sentinels_detail_600x600.jpg?v=1609965908.jpg?w=1380&t=st=1676307169~exp=1676307769~hmac=ec4286b43bc937d24e5bc8049ec0e6c1bd14edf20dcb3d14a3356bca07a7ece1')";
+   		document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundSize = "cover";
     }
     
     window.addEventListener('mousemove', function(e){
@@ -65,5 +72,7 @@
     window.addEventListener('mouseup', function(){
       drawing = false;
     });
+    
+    window.addEventListener('load', setup);
   </script>
 </body>
