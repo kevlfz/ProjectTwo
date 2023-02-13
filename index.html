@@ -17,6 +17,8 @@
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
     
+    let drawing = false;
+    
     class Root {
       constructor(x,y){
         this.x = x
@@ -25,25 +27,43 @@
         this.speedY = Math.random() * 4 -2;
         this.maxSize = Math.random() * 7 +5;
         this.size = Math.random() * 1 + 2;
+        this.angle = Math.random() * 6;
+        this.variedsize = Math.random() * 0.2 + 0.05;
       }
       update(){
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.size += 0.1;
+        this.x += this.speedX + Math.sin(this.angle);
+        this.y += this.speedY + Math.sin(this.angle);
+        this.size += this.variedsize;
+        this.angle += 0.1;
         if (this.size < this.maxSize){
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
           ctx.fillStyle = 'hsl(205, 76%, 61%)';
           ctx.fill();
           ctx.stroke();
+          requestAnimationFrame(this.update.bind(this));
         }
    		 }
     }
     
     window.addEventListener('mousemove', function(e){
-      const root = new Root(e.x, e.y);
-      root.update();
+      if(drawing){
+        for (let i = 0; i < 3; i++){
+          const root = new Root(e.x, e.y);
+          root.update();
+        }
+      }
     });
-
+    
+    window.addEventListener('mousedown', function(e){
+      drawing = true;
+      for (let i = 0; i < 30; i++){
+        const root = new Root(e.x, e.y);
+      	root.update();
+      }
+    });
+    window.addEventListener('mouseup', function(){
+      drawing = false;
+    });
   </script>
 </body>
