@@ -19,7 +19,7 @@
     
     let drawing = false;
     
-    class Lively{
+    class Flowers{
       constructor(x,y,size){
         this.x = x;
         this.y = y;
@@ -81,13 +81,19 @@
         if (this.size < this.maxSize){
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fillStyle = 'hsl(205, 76%, 61%)';
+          
+        	let hue = 129;
+  				let saturation = Math.floor(Math.random() * 100);
+  				let lightness = 48;
+  				ctx.fillStyle = 'hsl(' + hue + ',' + saturation + '%,' + lightness + '%)'
+          
+          // ctx.fillStyle = 'hsl(129, 'Math.random() * 20' %, 48%)';
           ctx.fill();
           ctx.stroke();
           requestAnimationFrame(this.update.bind(this));
         }
         else{
-          const flowers = new Lively(this.x, this.y, this.size);
+          const flowers = new Flowers(this.x, this.y, this.size);
         	flowers.grow();
         }
    		 }
@@ -123,3 +129,4 @@
     window.addEventListener('load', setup);
   </script>
 </body>
+
