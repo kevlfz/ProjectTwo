@@ -10,14 +10,22 @@
 <body>
   
   <canvas id="canva" width="300" height="300"></canvas>
+  <button id="btn">Clear Canvas</button>
   
   <script>
     const canvas = document.getElementById("canva");
     let ctx = canvas.getContext('2d');
-    ctx.canvas.width = window.innerWidth;
-    ctx.canvas.height = window.innerHeight;
+    ctx.canvas.width = 680;
+    ctx.canvas.height = 460;
     
     let drawing = false;
+    
+    function bgImg (){
+    	const r = Math.random() * 255
+      const g = Math.random() * 255
+      const b = Math.random() * 255
+      document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
+    }
     
     class Flowers{
       constructor(x,y,size){
@@ -46,10 +54,8 @@
           ctx.drawImage(this.image, this.frameSize * this.fX, this.frameSize * this.fY, this.frameSize, this.frameSize, this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
         	requestAnimationFrame(this.grow.bind(this));
         }
-        
       }
     }
-    
     
     class Stem {
       constructor(x,y){
@@ -73,6 +79,7 @@
         this.size += this.variedsize;
         this.angleX += this.varX;
         this.angleY += this.varY;
+        
         
         if (this.lightness < 70){
           this.lightness += 0.25;
@@ -103,10 +110,11 @@
       document.body.style.backgroundImage =
         "url('https://cdn.shopify.com/s/files/1/1394/8105/files/sentinels_detail_600x600.jpg?v=1609965908.jpg?w=1380&t=st=1676307169~exp=1676307769~hmac=ec4286b43bc937d24e5bc8049ec0e6c1bd14edf20dcb3d14a3356bca07a7ece1')";
    		document.body.style.backgroundRepeat = "no-repeat";
-      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundSize = "700px";
     }
     
     window.addEventListener('mousemove', function(e){
+      
       if(drawing){
         for (let i = 0; i < 3; i++){
           const root = new Stem(e.x, e.y);
@@ -127,6 +135,8 @@
     });
     
     window.addEventListener('load', setup);
+    btn.addEventListener('click', bgImg)
+    
   </script>
 </body>
 
