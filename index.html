@@ -10,19 +10,26 @@
 <body>
   
   <canvas id="canva" width="300" height="300"></canvas>
-  <button id="btn">Clear Canvas</button>
+  <button style="margin:30px;" id="btn">Erase</button>
   
   <script>
     const canvas = document.getElementById("canva");
     let ctx = canvas.getContext('2d');
     ctx.canvas.width = 683;
     ctx.canvas.height = 457;
+    const imgLinks = [
+      "url('https://cdn.shopify.com/s/files/1/1394/8105/files/sentinels_detail_600x600.jpg?v=1609965908.jpg?w=1380&t=st=1676307169~exp=1676307769~hmac=ec4286b43bc937d24e5bc8049ec0e6c1bd14edf20dcb3d14a3356bca07a7ece1')",
+      "url('https://www.wallmur.com/media/catalog/pdata/cache/1/crop_image/1100x/040ec0/c/_/black-and-white-forest-wallpaper-mural-wm-21343751oo-41481680.jpg')",
+      "url('https://images.custommade.com/NyCZz9O3clVzLWZGFsD5mbsW8TA=/custommade-photosets/125891/125891.423300.jpg')",
+      "url('https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/fl22107211073-image-kufaqx2q.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=aec133d36ca4f1a93a5668ca8eb6cccb')",
+      "url('https://media.istockphoto.com/id/907831032/photo/sun-bursts-in-the-rain-forest-vancouver-canada-in-black-and-white.jpg?b=1&s=170667a&w=0&k=20&c=TMXTY6Q6uCEMzqPIljwUFkpQrea5J826X7E2evXiG7g=')"
+    ];
     
     let drawing = false;
     
     function bgImg (){
       const context = canvas.getContext('2d');
-      context.clearRect(0, 0, 680, 460);
+      context.clearRect(0, 0, 700, 500);
    }
     
    let flowerBTN = "Flower Off";
@@ -120,13 +127,20 @@
    		 }
     }
     
+    function getRandomItem(arr) {
+    	const randomIndex = Math.floor(Math.random() * arr.length);
+    	const item = arr[randomIndex];
+    	return item;
+		}
+    
     function setup(){
       document.body.style.backgroundImage =
-        "url('https://cdn.shopify.com/s/files/1/1394/8105/files/sentinels_detail_600x600.jpg?v=1609965908.jpg?w=1380&t=st=1676307169~exp=1676307769~hmac=ec4286b43bc937d24e5bc8049ec0e6c1bd14edf20dcb3d14a3356bca07a7ece1')";
+        getRandomItem(imgLinks);
    		document.body.style.backgroundRepeat = "no-repeat";
       document.body.style.backgroundSize = "700px";
     }
     
+    btn.addEventListener('click', bgImg)
     window.addEventListener('mousemove', function(e){
       
       if(drawing){
@@ -149,11 +163,8 @@
     });
     
     window.addEventListener('load', setup);
-    btn.addEventListener('click', bgImg)
-    
   </script>
   
   <input type="button" value="Flower On" id="onoff" onclick="onoff();">
   
 </body>
-
