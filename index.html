@@ -21,11 +21,9 @@
     let drawing = false;
     
     function bgImg (){
-    	const r = Math.random() * 255
-      const g = Math.random() * 255
-      const b = Math.random() * 255
-      document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
-    }
+      const context = canvas.getContext('2d');
+      context.clearRect(0, 0, 680, 460);
+   }
     
     class Flowers{
       constructor(x,y,size){
