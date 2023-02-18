@@ -15,8 +15,8 @@
   <script>
     const canvas = document.getElementById("canva");
     let ctx = canvas.getContext('2d');
-    ctx.canvas.width = 680;
-    ctx.canvas.height = 460;
+    ctx.canvas.width = 683;
+    ctx.canvas.height = 457;
     
     let drawing = false;
     
@@ -24,6 +24,20 @@
       const context = canvas.getContext('2d');
       context.clearRect(0, 0, 680, 460);
    }
+    
+   let flowerBTN = "Flower Off";
+    
+		function onoff(){
+ 			let currentvalue = document.getElementById('onoff').value;
+  		if(currentvalue === "Flower Off"){
+   			document.getElementById("onoff").value="Flower On";
+        flowerBTN = "Flower On";
+ 		 	}
+      else{
+    		document.getElementById("onoff").value="Flower Off";
+        flowerBTN = "Flower Off";
+ 			}
+		}
     
     class Flowers{
       constructor(x,y,size){
@@ -99,7 +113,9 @@
         }
         else{
           const flowers = new Flowers(this.x, this.y, this.size);
-        	flowers.grow();
+          if (flowerBTN === "Flower On"){
+        		flowers.grow();
+          }
         }
    		 }
     }
@@ -136,5 +152,8 @@
     btn.addEventListener('click', bgImg)
     
   </script>
+  
+  <input type="button" value="Flower On" id="onoff" onclick="onoff();">
+  
 </body>
 
